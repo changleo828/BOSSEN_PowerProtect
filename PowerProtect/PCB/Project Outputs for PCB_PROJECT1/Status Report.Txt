@@ -1,0 +1,9 @@
+Output: Bill of Materials
+Type  : ReportComponents
+From  : Project [PCB_PROJECT1.PRJPCB]
+
+
+Files Generated   : 0
+Documents Printed : 0
+
+Finished Output Generation At 17:37:23 On 2012-10-16

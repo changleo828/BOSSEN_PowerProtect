@@ -1,0 +1,612 @@
+
+
+HI-TECH Software PICC Macro Assembler V8.05PL2
+                                                      Thu Nov  8 10:21:45 2012
+
+
+     1                           	processor	12F675
+     2                           	opt	pw 79
+     3                           	psect	__Z49231UD_,global,delta=1
+     4                           	psect	text0,local,class=CODE,delta=2
+     5                           	psect	config,global,class=CONFIG,delta=2
+     6                           	psect	text1,local,class=CODE,delta=2
+     7                           	psect	text2,local,class=CODE,delta=2
+     8                           	psect	text3,local,class=CODE,delta=2
+     9                           	psect	text4,local,class=CODE,delta=2
+    10                           	psect	text5,local,class=CODE,delta=2
+    11                           	psect	temp,global,ovrld,class=BANK0,space=1,de
+      +                          lta=1
+    12  0000                     
+    13  0000                     
+    14  0000                     
+    15  0000                     
+    16  0000                     
+    17  0000                     
+    18  0000                     
+    19  0000                     
+    20  0000                     
+    21  0000                     	;#
+    22                           
+    23                           	psect	text0
+    24  020F                     _delay
+    25                           ;	_i assigned to ?a_delay+0
+    26  0000                     _delay$i	set	?a_delay
+    27                           ;	_j assigned to ?a_delay+2
+    28  0000                     _delay$j	set	?a_delay+2
+    29                           ;main.c: 131: int i;
+    30  020F  1283               	bcf	3,5
+    31  0210  01A7               	clrf	?a_delay+2
+    32  0211  01A8               	clrf	?a_delay+3
+    33  0212                     l2
+    34                           ;main.c: 134: for(i=5000;i>0;i--){
+    35  0212  3088               	movlw	136
+    36  0213  00A5               	movwf	?a_delay
+    37  0214  3013               	movlw	19
+    38  0215  00A6               	movwf	?a_delay+1
+    39  0216                     l5
+    40                           ;main.c: 135: asm("clrwdt");
+    41  0216  0064               	clrwdt	;#
+    42                           ;main.c: 136: }
+    43  0217  08A5               	movf	?a_delay
+    44  0218  1903               	btfsc	3,2
+    45  0219  03A6               	decf	?a_delay+1
+    46  021A  03A5               	decf	?a_delay
+    47  021B  0826               	movf	?a_delay+1,w
+    48  021C  3A80               	xorlw	128
+    49  021D  00B2               	movwf	btemp
+    50  021E  3080               	movlw	128
+    51  021F  0232               	subwf	btemp,w
+    52  0220  3001               	movlw	1
+    53                           ;set	bank bits (((?a_delay+0)))
+    54  0221  1903               	btfsc	3,2
+    55  0222  0225               	subwf	?a_delay,w
+    56  0223  1803               	btfsc	3,0
+    57  0224  2A16               	goto	l5
+    58  0225  0AA7               	incf	?a_delay+2
+    59  0226  1903               	btfsc	3,2
+    60  0227  0AA8               	incf	?a_delay+3
+    61  0228  0828               	movf	?a_delay+3,w
+    62  0229  3A80               	xorlw	128
+    63  022A  00B2               	movwf	btemp
+    64  022B  3083               	movlw	131
+    65  022C  0232               	subwf	btemp,w
+    66  022D  30E8               	movlw	232
+    67                           ;set	bank bits for (((?a_delay+2)))
+    68  022E  1903               	btfsc	3,2
+    69  022F  0227               	subwf	?a_delay+2,w
+    70  0230  1803               	btfsc	3,0
+    71  0231  0008               	return
+    72  0232  2A12               	goto	l2
+    73                           
+    74                           	psect	config
+    75  2007  01CC               	dw	460	;#
+    76                           
+    77                           	psect	text1
+    78                           ;main.c: 138: void init()
+    79                           ;main.c: 139: {
+    80  0201                     _init
+    81                           ;main.c: 140: TRISIO=0X05;
+    82  0201  3005               	movlw	5
+    83  0202  1683               	bsf	3,5
+    84  0203  0085               	movwf	5
+    85                           ;main.c: 141: OPTION=0X00;
+    86  0204  0181               	clrf	1
+    87                           ;main.c: 142: CMCON = 0xFF;
+    88  0205  30FF               	movlw	-1
+    89  0206  1283               	bcf	3,5
+    90  0207  0099               	movwf	25	;volatile
+    91                           ;main.c: 143: INTCON = 0x00;
+    92  0208  018B               	clrf	11	;volatile
+    93                           ;main.c: 144: PIE1 = 0x00;
+    94  0209  1683               	bsf	3,5
+    95  020A  018C               	clrf	12
+    96                           ;main.c: 145: ANSEL = 0x05;
+    97  020B  3005               	movlw	5
+    98  020C  009F               	movwf	31
+    99                           ;main.c: 146: }
+   100  020D  1283               	bcf	3,5
+   101  020E  0008               	return
+   102                           
+   103                           	psect	text2
+   104                           ;main.c: 151: unsigned int GetADCValue(unsigned
+      +                           char ch)
+   105                           ;main.c: 152: {
+   106  025E                     _GetADCValue
+   107                           ;	_ch assigned to ?a_GetADCValue+0
+   108  0000                     _GetADCValue$ch	set	?a_GetADCValue
+   109                           ;	_i assigned to ?a_GetADCValue+1
+   110  0000                     _GetADCValue$i	set	?a_GetADCValue+1
+   111                           ;	_tmp assigned to ?a_GetADCValue+2
+   112  0000                     _GetADCValue$tmp	set	?a_GetADCValue+2
+   113                           ;	_value assigned to ?a_GetADCValue+4
+   114  0000                     _GetADCValue$value	set	?a_GetADCValue+4
+   115                           ;_ch stored from w
+   116  025E  1283               	bcf	3,5
+   117  025F  00AC               	movwf	?a_GetADCValue
+   118                           ;main.c: 153: unsigned int tmp = 0;
+   119  0260  01AE               	clrf	?a_GetADCValue+2
+   120  0261  01AF               	clrf	?a_GetADCValue+3
+   121                           ;main.c: 154: unsigned int value;
+   122  0262  00B2               	movwf	btemp
+   123  0263  1003               	bcf	3,0
+   124  0264  0DB2               	rlf	btemp
+   125  0265  1003               	bcf	3,0
+   126  0266  0D32               	rlf	btemp,w
+   127  0267  3881               	iorlw	-127
+   128  0268  009F               	movwf	31	;volatile
+   129                           ;main.c: 159: i = 8;
+   130  0269  3008               	movlw	8
+   131  026A  00AD               	movwf	?a_GetADCValue+1
+   132                           ;main.c: 160: while(i--)
+   133  026B  2A6D               	goto	l10
+   134  026C                     l11
+   135                           ;main.c: 161: {asm("nop");};
+   136  026C  0000               	nop	;#
+   137  026D                     l10
+   138  026D  03AD               	decf	?a_GetADCValue+1
+   139  026E  0F2D               	incfsz	?a_GetADCValue+1,w
+   140  026F  2A6C               	goto	l11
+   141                           ;main.c: 163: i = 5;
+   142  0270  3005               	movlw	5
+   143  0271  00AD               	movwf	?a_GetADCValue+1
+   144                           ;main.c: 164: while(i--){
+   145  0272  2A7E               	goto	l13
+   146  0273                     l14
+   147                           ;main.c: 165: (ADCON0 |= (1<<1));
+   148  0273  149F               	bsf	31,1	;volatile
+   149                           ;main.c: 166: while(!(ADCON0 & (1<<1)));
+   150  0274                     l16
+   151  0274  1C9F               	btfss	31,1	;volatile
+   152  0275  2A74               	goto	l16
+   153                           ;main.c: 167: value = ADRESH;
+   154  0276  081E               	movf	30,w	;volatile
+   155  0277  00B0               	movwf	?a_GetADCValue+4
+   156  0278  01B1               	clrf	?a_GetADCValue+5
+   157                           ;main.c: 168: value = ADRESL;
+   158  0279  1683               	bsf	3,5
+   159  027A  081E               	movf	30,w	;volatile
+   160  027B  1283               	bcf	3,5
+   161  027C  00B0               	movwf	?a_GetADCValue+4
+   162  027D  01B1               	clrf	?a_GetADCValue+5
+   163  027E                     l13
+   164                           ;main.c: 169: }
+   165  027E  03AD               	decf	?a_GetADCValue+1
+   166  027F  0F2D               	incfsz	?a_GetADCValue+1,w
+   167  0280  2A73               	goto	l14
+   168                           ;main.c: 171: tmp = 0;
+   169  0281  01AE               	clrf	?a_GetADCValue+2
+   170  0282  01AF               	clrf	?a_GetADCValue+3
+   171                           ;main.c: 172: i = 16;
+   172  0283  3010               	movlw	16
+   173  0284  00AD               	movwf	?a_GetADCValue+1
+   174                           ;main.c: 173: while(i--){
+   175  0285  2A9A               	goto	l19
+   176  0286                     l20
+   177                           ;main.c: 174: (ADCON0 |= (1<<1));
+   178  0286  149F               	bsf	31,1	;volatile
+   179                           ;main.c: 175: while(!(ADCON0 & (1<<1)));
+   180  0287                     l22
+   181  0287  1C9F               	btfss	31,1	;volatile
+   182  0288  2A87               	goto	l22
+   183                           ;main.c: 176: value = ADRESH;
+   184  0289  081E               	movf	30,w	;volatile
+   185  028A  00B0               	movwf	?a_GetADCValue+4
+   186  028B  01B1               	clrf	?a_GetADCValue+5
+   187                           ;main.c: 177: value <<= 8;
+   188  028C  00B1               	movwf	?a_GetADCValue+5
+   189  028D  01B0               	clrf	?a_GetADCValue+4
+   190                           ;main.c: 178: value += ADRESL;
+   191  028E  1683               	bsf	3,5
+   192  028F  081E               	movf	30,w	;volatile
+   193  0290  1283               	bcf	3,5
+   194  0291  07B0               	addwf	?a_GetADCValue+4
+   195  0292  1803               	btfsc	3,0
+   196  0293  0AB1               	incf	?a_GetADCValue+5
+   197                           ;main.c: 179: tmp += value;
+   198  0294  0830               	movf	?a_GetADCValue+4,w
+   199  0295  07AE               	addwf	?a_GetADCValue+2
+   200  0296  1803               	btfsc	3,0
+   201  0297  0AAF               	incf	?a_GetADCValue+3
+   202  0298  0831               	movf	?a_GetADCValue+5,w
+   203  0299  07AF               	addwf	?a_GetADCValue+3
+   204  029A                     l19
+   205                           ;main.c: 180: }
+   206  029A  03AD               	decf	?a_GetADCValue+1
+   207  029B  0F2D               	incfsz	?a_GetADCValue+1,w
+   208  029C  2A86               	goto	l20
+   209                           ;main.c: 182: return tmp / (unsigned int)16;
+   210  029D  082F               	movf	?a_GetADCValue+3,w
+   211  029E  00B3               	movwf	btemp+1
+   212  029F  082E               	movf	?a_GetADCValue+2,w
+   213  02A0  00B2               	movwf	btemp
+   214  02A1  3004               	movlw	4
+   215  02A2  00B4               	movwf	btemp+2
+   216  02A3                     u85
+   217  02A3  1003               	bcf	3,0
+   218  02A4  0CB3               	rrf	btemp+1
+   219  02A5  0CB2               	rrf	btemp
+   220  02A6  0BB4               	decfsz	btemp+2
+   221  02A7  2AA3               	goto	u85
+   222                           ;main.c: 183: }
+   223  02A8  0008               	return
+   224                           
+   225                           	psect	text3
+   226                           ;main.c: 184: unsigned int GetUValue(unsigned c
+      +                          har ch)
+   227                           ;main.c: 185: {
+   228  0233                     _GetUValue
+   229                           ;	_ch assigned to ?a_GetUValue+0
+   230  0000                     _GetUValue$ch	set	?a_GetUValue
+   231                           ;	_value assigned to ?a_GetUValue+1
+   232  0000                     _GetUValue$value	set	?a_GetUValue+1
+   233                           ;	_U_value_temp assigned to ?a_GetUValue+3
+   234  0000                     _GetUValue$U_value_temp	set	?a_GetUValue+3
+   235                           ;_ch stored from w
+   236  0233  1283               	bcf	3,5
+   237  0234  00A5               	movwf	?a_GetUValue
+   238                           ;main.c: 186: unsigned int value;
+   239  0235  1283               	bcf	3,5
+   240  0236  225E               	call	_GetADCValue
+   241  0237  0832               	movf	btemp,w
+   242  0238  00A6               	movwf	?a_GetUValue+1
+   243  0239  0833               	movf	btemp+1,w
+   244  023A  00A7               	movwf	?a_GetUValue+2
+   245                           ;main.c: 189: U_value_temp = value * (unsigned 
+      +                          long)(3300);
+   246  023B  30E4               	movlw	228
+   247  023C  00B6               	movwf	btemp+4
+   248  023D  300C               	movlw	12
+   249  023E  00B7               	movwf	btemp+5
+   250  023F  01B8               	clrf	btemp+6
+   251  0240  01B9               	clrf	btemp+7
+   252  0241  0827               	movf	?a_GetUValue+2,w
+   253  0242  00B3               	movwf	btemp+1
+   254  0243  0826               	movf	?a_GetUValue+1,w
+   255  0244  00B2               	movwf	btemp
+   256  0245  01B4               	clrf	btemp+2
+   257  0246  01B5               	clrf	btemp+3
+   258  0247  23C2               	call	llmul
+   259  0248  0832               	movf	btemp,w
+   260  0249  00A8               	movwf	?a_GetUValue+3
+   261  024A  0833               	movf	btemp+1,w
+   262  024B  00A9               	movwf	?a_GetUValue+4
+   263  024C  0834               	movf	btemp+2,w
+   264  024D  00AA               	movwf	?a_GetUValue+5
+   265  024E  0835               	movf	btemp+3,w
+   266  024F  00AB               	movwf	?a_GetUValue+6
+   267                           ;main.c: 190: U_value_temp /= (unsigned long)10
+      +                          24;
+   268  0250  300A               	movlw	10
+   269  0251  00B2               	movwf	btemp
+   270  0252                     u95
+   271  0252  1003               	bcf	3,0
+   272  0253  0CAB               	rrf	?a_GetUValue+6
+   273  0254  0CAA               	rrf	?a_GetUValue+5
+   274  0255  0CA9               	rrf	?a_GetUValue+4
+   275  0256  0CA8               	rrf	?a_GetUValue+3
+   276  0257  0BB2               	decfsz	btemp
+   277  0258  2A52               	goto	u95
+   278                           ;main.c: 191: return (unsigned int)U_value_temp
+      +                          ;
+   279  0259  0829               	movf	?a_GetUValue+4,w
+   280  025A  00B3               	movwf	btemp+1
+   281  025B  0828               	movf	?a_GetUValue+3,w
+   282  025C  00B2               	movwf	btemp
+   283                           ;main.c: 192: }
+   284  025D  0008               	return
+   285                           
+   286                           	psect	text4
+   287                           ;main.c: 195: int main(void)
+   288                           ;main.c: 196: {
+   289  02A9                     _main
+   290                           ;	_i assigned to ?a_main+0
+   291  0000                     _main$i	set	?a_main
+   292                           ;	_I_va assigned to ?a_main+1
+   293  0000                     _main$I_va	set	?a_main+1
+   294                           ;	_U_va assigned to ?a_main+3
+   295  0000                     _main$U_va	set	?a_main+3
+   296                           ;main.c: 197: unsigned int U_va;
+   297  02A9  1283               	bcf	3,5
+   298  02AA  2201               	call	_init
+   299                           ;main.c: 202: GPIO &= ~((1<<4)|(1<<5));
+   300  02AB  30CF               	movlw	-49
+   301  02AC  0585               	andwf	5	;volatile
+   302                           ;main.c: 203: i = 100;
+   303  02AD  3064               	movlw	100
+   304  02AE  00A0               	movwf	?a_main
+   305                           ;main.c: 204: while(i--){
+   306  02AF  2AB2               	goto	l27
+   307  02B0                     l28
+   308                           ;main.c: 205: GPIO &= ~(1<<1);
+   309  02B0  1085               	bcf	5,1	;volatile
+   310                           ;main.c: 206: GPIO |= (1<<1);
+   311  02B1  1485               	bsf	5,1	;volatile
+   312  02B2                     l27
+   313                           ;main.c: 207: }
+   314  02B2  03A0               	decf	?a_main
+   315  02B3  0F20               	incfsz	?a_main,w
+   316  02B4  2AB0               	goto	l28
+   317  02B5                     l31
+   318                           ;main.c: 208: while(1)
+   319                           ;main.c: 209: {
+   320  02B5  1085               	bcf	5,1	;volatile
+   321                           ;main.c: 211: U_va = GetUValue(0);
+   322  02B6  3000               	movlw	0
+   323  02B7  1283               	bcf	3,5
+   324  02B8  2233               	call	_GetUValue
+   325  02B9  0832               	movf	btemp,w
+   326  02BA  00A3               	movwf	?a_main+3
+   327  02BB  0833               	movf	btemp+1,w
+   328  02BC  00A4               	movwf	?a_main+4
+   329                           ;main.c: 212: GPIO |= (1<<1);
+   330  02BD  1485               	bsf	5,1	;volatile
+   331                           ;main.c: 213: I_va = GetUValue(2);
+   332  02BE  3002               	movlw	2
+   333  02BF  2233               	call	_GetUValue
+   334  02C0  0832               	movf	btemp,w
+   335  02C1  00A1               	movwf	?a_main+1
+   336  02C2  0833               	movf	btemp+1,w
+   337  02C3  00A2               	movwf	?a_main+2
+   338                           ;main.c: 214: if((U_va>(((9500) - 500) / 100 * 
+      +                          18 + 5)) && (U_va<(((13500) - 500) / 100 * 18 -
+      +                           5)) && (I_va<((1400) * (1.3) - 10))){
+   339  02C4  3006               	movlw	6
+   340  02C5  0224               	subwf	?a_main+4,w
+   341  02C6  305A               	movlw	90
+   342  02C7  1903               	btfsc	3,2
+   343  02C8  0223               	subwf	?a_main+3,w
+   344  02C9  1C03               	btfss	3,0
+   345  02CA  2AE2               	goto	l33
+   346  02CB  3009               	movlw	9
+   347  02CC  0224               	subwf	?a_main+4,w
+   348  02CD  301F               	movlw	31
+   349  02CE  1903               	btfsc	3,2
+   350  02CF  0223               	subwf	?a_main+3,w
+   351  02D0  1803               	btfsc	3,0
+   352  02D1  2AE2               	goto	l33
+   353  02D2  0822               	movf	?a_main+2,w
+   354  02D3  00B3               	movwf	btemp+1
+   355  02D4  0821               	movf	?a_main+1,w
+   356  02D5  00B2               	movwf	btemp
+   357  02D6  23B1               	call	lwtoft
+   358  02D7  3040               	movlw	64
+   359  02D8  00B5               	movwf	btemp+3
+   360  02D9  30E2               	movlw	226
+   361  02DA  00B6               	movwf	btemp+4
+   362  02DB  3044               	movlw	68
+   363  02DC  00B7               	movwf	btemp+5
+   364  02DD  2379               	call	ftcmp
+   365  02DE  1803               	btfsc	3,0
+   366  02DF  2AE2               	goto	l33
+   367                           ;main.c: 215: GPIO |= (1<<4)|(1<<5);
+   368  02E0  3030               	movlw	48
+   369  02E1  0485               	iorwf	5	;volatile
+   370  02E2                     l33
+   371                           ;main.c: 216: }
+   372  02E2  3006               	movlw	6
+   373  02E3  0224               	subwf	?a_main+4,w
+   374  02E4  304F               	movlw	79
+   375  02E5  1903               	btfsc	3,2
+   376  02E6  0223               	subwf	?a_main+3,w
+   377  02E7  1C03               	btfss	3,0
+   378  02E8  2B04               	goto	u200
+   379  02E9  3009               	movlw	9
+   380  02EA  0224               	subwf	?a_main+4,w
+   381  02EB  302A               	movlw	42
+   382  02EC  1903               	btfsc	3,2
+   383  02ED  0223               	subwf	?a_main+3,w
+   384  02EE  1803               	btfsc	3,0
+   385  02EF  2B04               	goto	u200
+   386  02F0  0822               	movf	?a_main+2,w
+   387  02F1  00B3               	movwf	btemp+1
+   388  02F2  0821               	movf	?a_main+1,w
+   389  02F3  00B2               	movwf	btemp
+   390  02F4  23B1               	call	lwtoft
+   391  02F5  0832               	movf	btemp,w
+   392  02F6  00B5               	movwf	btemp+3
+   393  02F7  0833               	movf	btemp+1,w
+   394  02F8  00B6               	movwf	btemp+4
+   395  02F9  0834               	movf	btemp+2,w
+   396  02FA  00B7               	movwf	btemp+5
+   397  02FB  3080               	movlw	128
+   398  02FC  00B2               	movwf	btemp
+   399  02FD  30E3               	movlw	227
+   400  02FE  00B3               	movwf	btemp+1
+   401  02FF  3044               	movlw	68
+   402  0300  00B4               	movwf	btemp+2
+   403  0301  2379               	call	ftcmp
+   404  0302  1803               	btfsc	3,0
+   405  0303  2B06               	goto	l34
+   406  0304                     u200
+   407                           ;main.c: 218: GPIO &= ~((1<<4)|(1<<5));
+   408  0304  30CF               	movlw	-49
+   409  0305  0585               	andwf	5	;volatile
+   410  0306                     l34
+   411                           ;main.c: 219: }
+   412  0306  0822               	movf	?a_main+2,w
+   413  0307  00B3               	movwf	btemp+1
+   414  0308  0821               	movf	?a_main+1,w
+   415  0309  00B2               	movwf	btemp
+   416  030A  23B1               	call	lwtoft
+   417  030B  0832               	movf	btemp,w
+   418  030C  00B5               	movwf	btemp+3
+   419  030D  0833               	movf	btemp+1,w
+   420  030E  00B6               	movwf	btemp+4
+   421  030F  0834               	movf	btemp+2,w
+   422  0310  00B7               	movwf	btemp+5
+   423  0311  3080               	movlw	128
+   424  0312  00B2               	movwf	btemp
+   425  0313  30E3               	movlw	227
+   426  0314  00B3               	movwf	btemp+1
+   427  0315  3044               	movlw	68
+   428  0316  00B4               	movwf	btemp+2
+   429  0317  2379               	call	ftcmp
+   430  0318  1803               	btfsc	3,0
+   431  0319  2B1D               	goto	l35
+   432                           ;main.c: 221: GPIO &= ~((1<<4)|(1<<5));
+   433  031A  30CF               	movlw	-49
+   434  031B  0585               	andwf	5	;volatile
+   435                           ;main.c: 222: delay();
+   436  031C  220F               	call	_delay
+   437  031D                     l35
+   438                           ;main.c: 223: }
+   439  031D  0064               	clrwdt	;#
+   440                           ;main.c: 231: }
+   441  031E  2AB5               	goto	l31
+   442                           
+   443                           	psect	text5
+   444  0000                     
+   445  0000                     
+   446  0000                     
+   447  0000                     
+   448  0000                     
+   449  0000                     
+   450  0000                     
+   451  0000                     
+   452  0000                     
+   453  0000                     
+   454  0000                     
+   455  0000                     
+   456  0000                     
+   457  0000                     
+   458  0000                     
+   459  0000                     
+   460  0000                     
+   461  0000                     
+   462  0000                     
+   463  0000                     
+   464  0000                     
+   465  0000                     
+   466  0000                     
+   467  0000                     
+   468  0000                     
+   469  0000                     
+   470  0000                     
+   471  0000                     
+   472  0000                     
+   473  0000                     
+   474  0000                     
+   475  0000                     
+   476  0000                     
+   477  0000                     
+   478  0000                     
+   479  0000                     
+   480  0000                     
+   481  0000                     
+   482  0000                     
+   483  0000                     
+   484  0000                     
+   485  0000                     
+   486  0000                     
+   487  0000                     
+   488  0000                     
+   489  0000                     
+   490  0000                     
+   491  0000                     
+   492  0000                     
+   493  0000                     
+   494  0000                     
+   495  0000                     
+   496  0000                     
+   497  0000                     
+   498  0000                     
+   499  0000                     
+   500  0000                     
+   501  0000                     
+   502  0000                     
+   503  0000                     
+   504  0000                     
+   505  0000                     
+   506  0000                     
+   507  0000                     
+   508  0000                     
+   509  0000                     
+   510  0000                     
+   511  0000                     
+   512  0000                     
+   513  0000                     
+   514  0000                     
+   515  0000                     
+   516  0000                     
+   517  0000                     
+   518  0000                     
+   519  0000                     
+   520  0000                     
+   521  0000                     
+   522  0000                     
+   523  0000                     
+   524  0000                     
+   525  0000                     
+   526  0000                     
+   527  0000                     
+   528  0000                     
+   529  0000                     
+   530  0000                     
+   531  0000                     
+   532  0000                     
+   533  0000                     
+   534  0000                     
+   535  0000                     
+   536  0000                     
+   537  0000                     
+   538  0000                     
+   539  0000                     
+   540  0000                     
+   541  0000                     
+   542  0000                     
+   543  0000                     
+   544  0000                     
+   545  0000                     
+   546  0000                     
+   547  0000                     
+   548  0000                     
+   549  0000                     
+   550  0000                     
+   551  0000                     
+   552  0000                     
+   553  0000                     
+   554  0000                     
+   555  0000                     
+   556  0000                     
+   557  0000                     
+   558  0000                     
+   559  0000                     
+   560  0000                     
+   561  0000                     
+   562  0000                     
+   563  0000                     
+   564  0000                     
+   565  0000                     
+   566  0000                     
+   567  0000                     
+   568  0000                     
+   569                           
+   570                           	psect	temp
+   571  0032                     btemp
+   572  0032                     	ds	8
+
+
+HI-TECH Software PICC Macro Assembler V8.05PL2
+Symbol Table                                          Thu Nov  8 10:21:45 2012
+
+                ?a_main 0020                       l2 0212  
+                     l5 0216                 ?a_delay 0025  
+                    l10 026D                      l11 026C  
+                    l20 0286                      l13 027E  
+                    l22 0287                      l14 0273  
+                    l31 02B5                      l16 0274  
+                    l33 02E2                      l34 0306  
+                    l35 031D                      l27 02B2  
+                    l19 029A                      l28 02B0  
+                    u85 02A3                      u95 0252  
+           ?a_GetUValue 0025                     u200 0304  
+             _GetUValue 0233                    _main 02A9  
+                  _init 0201                    btemp 0032  
+                  ftcmp 0379                    llmul 03C2  
+                  start 0004             _GetADCValue 025E  
+                 _delay 020F                   lwtoft 03B1  
+                 status 0003           ?a_GetADCValue 002C  
+            used_btemp0 0001              used_btemp1 0001  
+            used_btemp2 0001              used_btemp3 0001  
+            used_btemp4 0001              used_btemp5 0001  
+            used_btemp6 0001              used_btemp7 0001  

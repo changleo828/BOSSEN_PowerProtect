@@ -1,0 +1,247 @@
+__S0 2100 0
+__S1 3E 0
+l0neg 3B4 0 CODE
+_main 2A9 0 CODE
+ftcmp 379 0 CODE
+almul 3C2 0 CODE
+llmul 3C2 0 CODE
+_init 201 0 CODE
+_exit 4 0 CODE
+start 4 0 CODE
+__Hintsave_0 20 0 BANK0
+__Lintsave_0 20 0 BANK0
+__Hintcode 4 0 CODE
+__Lintcode 4 0 CODE
+__Hintsave_1 3E 0 BANK1
+__Lintsave_1 3E 0 BANK1
+_delay 20F 0 CODE
+altoft 398 0 CODE
+lltoft 39D 0 CODE
+awtoft 3AB 0 CODE
+lwtoft 3B1 0 CODE
+zerctt 336 0 CODE
+_GetUValue 233 0 CODE
+?a_GetADCValue 2C 0 BANK0
+__Hintsave_2 3E 0 BANK2
+__Lintsave_2 3E 0 BANK2
+__Hintsave 3E 0
+__Lintsave 3E 0
+ftnorm1 355 0 CODE
+__Hintsave_3 3E 0 BANK3
+__Lintsave_3 3E 0 BANK3
+__Hcode 3E 0
+__Lcode 3E 0
+__Hstrings 6 0 STRING
+__Lstrings 6 0 STRING
+?a_main 20 0 BANK0
+__Htemp 3E 0 BANK0
+__Ltemp 32 0 BANK0
+__Hinit 4 0 CODE
+__Linit 4 0 CODE
+almul_x 3C3 0 CODE
+llmul_x 3C3 0 CODE
+powerup 0 0 CODE
+__Htext 3E 0
+__Ltext 3E 0
+__Hpowerup 4 0 CODE
+__Lpowerup 0 0 CODE
+__Hvectors 6 0 CODE
+__Lvectors 6 0 CODE
+__Hclrtext 6 0 CODE
+__Lclrtext 6 0 CODE
+__Hidloc 2000 0 IDLOC
+__Lidloc 2000 0 IDLOC
+__Hpstrings 6 0 CODE
+__Lpstrings 6 0 CODE
+__Hend_init 6 0 CODE
+__Lend_init 4 0 CODE
+_GetADCValue 25E 0 CODE
+__Hnvram 3E 0 BANK0
+__Lnvram 3E 0 BANK0
+?a_delay 25 0 BANK0
+__Hfloat_text0 3FF 0 CODE
+__Lfloat_text0 3B4 0 CODE
+?a_GetUValue 25 0 BANK0
+__Hinit23 4 0 CODE
+__Linit23 4 0 CODE
+__H__Z49231UD_ 3E 0
+__L__Z49231UD_ 3E 0
+__Hfloat_text1 6 0 CODE
+__Lfloat_text1 6 0 CODE
+__Brbit_0 20 FFFFFF20 BANK0
+__Hrbit_0 100 FFFFFF20 BANK0
+__Lrbit_0 100 FFFFFF20 BANK0
+__Brbit_1 3E FFFFFE4E BANK1
+__Hrbss_0 32 0 BANK0
+__Hrbit_1 1F0 FFFFFE4E BANK1
+__Lrbss_0 20 0 BANK0
+__Lrbit_1 1F0 FFFFFE4E BANK1
+__Brbit_2 3E FFFFFE4E BANK2
+__Hrbss_1 3E 0 BANK1
+__Hrbit_2 1F0 FFFFFE4E BANK2
+__Lrbss_1 3E 0 BANK1
+__Lrbit_2 1F0 FFFFFE4E BANK2
+__Brbit_3 3E FFFFFE4E BANK3
+__Hrbss_2 3E 0 BANK2
+__Hrbit_3 1F0 FFFFFE4E BANK3
+__Lrbss_2 3E 0 BANK2
+__Lrbit_3 1F0 FFFFFE4E BANK3
+ftunpack1 32B 0 CODE
+__Hrbss_3 3E 0 BANK3
+__Lrbss_3 3E 0 BANK3
+__Hintentry 4 0 CODE
+__Lintentry 4 0 CODE
+ftunpack2 33A 0 CODE
+intlevel0 4 0 CODE
+intlevel1 4 0 CODE
+__Hfloat_text2 6 0 CODE
+__Lfloat_text2 6 0 CODE
+storeback 3F0 0 CODE
+__Hconfig 2008 0 CONFIG
+__Lconfig 2007 0 CONFIG
+__Hfloat_text3 6 0 CODE
+__Lfloat_text3 6 0 CODE
+storeback_3 31F 0 CODE
+__Hintret 4 0 CODE
+__Lintret 4 0 CODE
+__Hstruct 3E 0 BANK0
+__Lstruct 3E 0 BANK0
+used_btemp10 1 0
+used_btemp0 1 0
+__Hfloat_text4 3B4 0 CODE
+__Lfloat_text4 32B 0 CODE
+used_btemp1 1 0
+used_btemp11 1 0
+used_btemp2 1 0
+used_btemp3 1 0
+used_btemp4 1 0
+used_btemp5 1 0
+__Hcommon_ram 3E 0
+__Lcommon_ram 3E 0
+used_btemp6 1 0
+used_btemp7 1 0
+used_btemp8 1 0
+used_btemp9 1 0
+__Hidata_0 6 0 CODE
+__Lidata_0 6 0 CODE
+__Hrdata_0 32 0 BANK0
+__Lrdata_0 32 0 BANK0
+__Hidata_1 3E 0
+__Lidata_1 3E 0
+__Heeprom_data 2100 0 EEDATA
+__Leeprom_data 2100 0 EEDATA
+__Hrdata_1 3E 0 BANK1
+__Lrdata_1 3E 0 BANK1
+__Hidata_2 3E 0
+__Lidata_2 3E 0
+__Hrdata_2 3E 0 BANK2
+__Lrdata_2 3E 0 BANK2
+__Hidata_3 3E 0
+__Lidata_3 3E 0
+__Hrdata_3 3E 0 BANK3
+__Lrdata_3 3E 0 BANK3
+__Hnvram_1 3E 0 BANK1
+__Lnvram_1 3E 0 BANK1
+__Bnvbit_0 3E FFFFFE4E BANK0
+__Hnvbit_0 1F0 FFFFFE4E BANK0
+__Lnvbit_0 1F0 FFFFFE4E BANK0
+__Hnvram_2 3E 0 BANK2
+__Lnvram_2 3E 0 BANK2
+__Bnvbit_1 3E FFFFFE4E BANK1
+__Hnvbit_1 1F0 FFFFFE4E BANK1
+__Lnvbit_1 1F0 FFFFFE4E BANK1
+__Hnvram_3 3E 0 BANK3
+__Lnvram_3 3E 0 BANK3
+__Bnvbit_2 3E FFFFFE4E BANK2
+__Hnvbit_2 1F0 FFFFFE4E BANK2
+__Lnvbit_2 1F0 FFFFFE4E BANK2
+__Bnvbit_3 3E FFFFFE4E BANK3
+__Hnvbit_3 1F0 FFFFFE4E BANK3
+__Lnvbit_3 1F0 FFFFFE4E BANK3
+__Hstringtable 6 0 ENTRY
+__Lstringtable 6 0 ENTRY
+%segments
+powerup 0 7 CODE
+intentry 8 B CODE
+intsave_0 20 31 BANK0
+temp 32 3D COMBANK
+config 400E 400F CONFIG
+float_text0 768 7FD CODE
+float_text4 656 767 CODE
+ftext0 63E 655 CODE
+text4 552 63D CODE
+text2 4BC 551 CODE
+text3 466 4BB CODE
+text0 41E 465 CODE
+text1 402 41D CODE
+%locals
+F:\PowerProtect\code\main.obj
+btemp 32 0 BANK0
+status 3
+F:\PowerProtect\code\main.c
+130 20F 0 CODE
+133 20F 0 CODE
+134 212 0 CODE
+135 216 0 CODE
+134 217 0 CODE
+133 225 0 CODE
+140 201 0 CODE
+141 204 0 CODE
+142 205 0 CODE
+143 208 0 CODE
+144 209 0 CODE
+145 20B 0 CODE
+146 20D 0 CODE
+152 25E 0 CODE
+153 260 0 CODE
+157 262 0 CODE
+159 269 0 CODE
+160 26B 0 CODE
+161 26C 0 CODE
+160 26D 0 CODE
+163 270 0 CODE
+164 272 0 CODE
+165 273 0 CODE
+166 274 0 CODE
+167 276 0 CODE
+168 279 0 CODE
+164 27E 0 CODE
+171 281 0 CODE
+172 283 0 CODE
+173 285 0 CODE
+174 286 0 CODE
+175 287 0 CODE
+176 289 0 CODE
+177 28C 0 CODE
+178 28E 0 CODE
+179 294 0 CODE
+173 29A 0 CODE
+182 29D 0 CODE
+183 2A8 0 CODE
+185 233 0 CODE
+188 233 0 CODE
+189 23B 0 CODE
+190 250 0 CODE
+191 259 0 CODE
+192 25D 0 CODE
+196 2A9 0 CODE
+201 2A9 0 CODE
+202 2AB 0 CODE
+203 2AD 0 CODE
+204 2AF 0 CODE
+205 2B0 0 CODE
+206 2B1 0 CODE
+204 2B2 0 CODE
+210 2B5 0 CODE
+211 2B6 0 CODE
+212 2BD 0 CODE
+213 2BE 0 CODE
+214 2C4 0 CODE
+215 2E0 0 CODE
+217 2E2 0 CODE
+218 304 0 CODE
+220 306 0 CODE
+221 31A 0 CODE
+222 31C 0 CODE
+224 31D 0 CODE
+208 31E 0 CODE
